@@ -102,11 +102,15 @@ class CallerLock extends Lock
      */
     protected function getLockInstancesForCallerRoles()
     {
-        $that = $this;
-        
-        return array_map(function ($role) use($that) {
-            return $that->manager->role($role);
-        }, $this->caller->getCallerRoles());
+        return array_map( array( $this, 'getLockInstancesForCallerRole' ), $this->caller->getCallerRoles());
+    }
+    
+    /**
+     * This function is a workaround for php5.3
+     */
+    protected function getLockInstancesForCallerRole( $role )
+    {
+        return $this->manager->role( $role );
     }
 
     /**
