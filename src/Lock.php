@@ -154,9 +154,11 @@ abstract class Lock
         }, array_filter($this->getPermissions(), function (Permission $permission) use ($resourceType) {
             return $permission instanceof Privilege && $permission->getResourceType() === $resourceType;
         })));
-
-        return array_values(array_filter($ids, function ($id) use ($action, $resourceType) {
-            return $this->can($action, $resourceType, $id);
+        
+        $that = $this; // @todo: php5.3 workaround
+        
+        return array_values(array_filter($ids, function ($id) use ($action, $resourceType, $that) {
+            return $that->can($action, $resourceType, $id);
         }));
     }
 
@@ -177,9 +179,11 @@ abstract class Lock
         }, array_filter($this->getPermissions(), function (Permission $permission) use ($resourceType) {
             return $permission instanceof Restriction && $permission->getResourceType() === $resourceType;
         })));
+        
+        $that = $this; // @todo: php5.3 workaround
 
-        return array_values(array_filter($ids, function ($id) use ($action, $resourceType) {
-            return $this->cannot($action, $resourceType, $id);
+        return array_values(array_filter($ids, function ($id) use ($action, $resourceType, $that) {
+            return $that->cannot($action, $resourceType, $id);
         }));
     }
 
