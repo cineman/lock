@@ -3,10 +3,8 @@ namespace BeatSwitch\Lock\Roles;
 
 use BeatSwitch\Lock\LockAware;
 
-final class SimpleRole implements Role
+final class SimpleRole extends LockAware implements Role
 {
-    use LockAware;
-
     /**
      * @var string
      */
