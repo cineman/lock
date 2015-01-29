@@ -26,7 +26,7 @@ class RoleLockSpec extends ObjectBehavior
 
     function it_set_and_check_permissions()
     {
-        $this->allow(['create', 'edit']);
+        $this->allow(array('create', 'edit'));
 
         $this->can('create')->shouldReturn(true);
         $this->can('edit')->shouldReturn(true);
@@ -34,7 +34,7 @@ class RoleLockSpec extends ObjectBehavior
 
     function it_set_and_inverse_check_permissions()
     {
-        $this->allow(['create', 'edit']);
+        $this->allow(array('create', 'edit'));
 
         $this->cannot('update')->shouldReturn(true);
     }
@@ -65,14 +65,14 @@ class RoleLockSpec extends ObjectBehavior
         $this->toggle('edit', 'users');
         $this->can('edit', 'users')->shouldReturn(false);
 
-        $this->toggle(['create', 'edit'], 'users');
-        $this->can(['create', 'edit'], 'users')->shouldReturn(true);
+        $this->toggle(array('create', 'edit'), 'users');
+        $this->can(array('create', 'edit'), 'users')->shouldReturn(true);
     }
 
     function it_can_work_with_permission_conditions()
     {
-        $this->allow('create', 'posts', null, [new TrueConditionStub()]);
-        $this->allow('create', 'pages', null, [new FalseConditionStub()]);
+        $this->allow('create', 'posts', null, array(new TrueConditionStub()));
+        $this->allow('create', 'pages', null, array(new FalseConditionStub()));
 
         $this->can('create', 'posts')->shouldReturn(true);
         $this->can('create', 'pages')->shouldReturn(false);

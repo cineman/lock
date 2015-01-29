@@ -28,7 +28,7 @@ abstract class StaticDriverTestCase extends PersistentDriverTestCase
     {
         $lock = $this->getCallerLock();
 
-        $lock->allow('upload', 'files', null, [new FalseConditionStub(), new TrueConditionStub()]);
+        $lock->allow('upload', 'files', null, array(new FalseConditionStub(), new TrueConditionStub()));
 
         $this->assertFalse($lock->can('upload', 'files'));
     }

@@ -27,7 +27,7 @@ abstract class AbstractPermission implements Permission
      * @param \BeatSwitch\Lock\Resources\Resource|null $resource
      * @param \BeatSwitch\Lock\Permissions\Condition|\BeatSwitch\Lock\Permissions\Condition[]|\Closure $conditions
      */
-    public function __construct($action, Resource $resource = null, $conditions = [])
+    public function __construct($action, Resource $resource = null, $conditions = array())
     {
         $this->action = $action;
         $this->resource = $resource;
@@ -114,12 +114,12 @@ abstract class AbstractPermission implements Permission
      *
      * @param \BeatSwitch\Lock\Permissions\Condition|\BeatSwitch\Lock\Permissions\Condition[]|\Closure $conditions
      */
-    protected function setConditions($conditions = [])
+    protected function setConditions($conditions = array())
     {
         if ($conditions instanceof Closure || is_array($conditions)) {
             $this->conditions = $conditions;
         } else {
-            $this->conditions = [$conditions];
+            $this->conditions = array($conditions);
         }
     }
 

@@ -64,7 +64,7 @@ abstract class Lock
      * @param int $resourceId
      * @param \BeatSwitch\Lock\Permissions\Condition|\BeatSwitch\Lock\Permissions\Condition[]|\Closure $conditions
      */
-    public function allow($action, $resource = null, $resourceId = null, $conditions = [])
+    public function allow($action, $resource = null, $resourceId = null, $conditions = array())
     {
         $actions = (array) $action;
         $resource = $this->convertResourceToObject($resource, $resourceId);
@@ -97,7 +97,7 @@ abstract class Lock
      * @param int $resourceId
      * @param \BeatSwitch\Lock\Permissions\Condition|\BeatSwitch\Lock\Permissions\Condition[]|\Closure $conditions
      */
-    public function deny($action, $resource = null, $resourceId = null, $conditions = [])
+    public function deny($action, $resource = null, $resourceId = null, $conditions = array())
     {
         $actions = (array) $action;
         $resource = $this->convertResourceToObject($resource, $resourceId);
@@ -270,7 +270,7 @@ abstract class Lock
      */
     protected function getAliasesForAction($action)
     {
-        $actions = [];
+        $actions = array();
 
         foreach ($this->manager->getAliases() as $aliasName => $alias) {
             if ($alias->hasAction($action)) {

@@ -39,7 +39,7 @@ abstract class PersistentDriverTestCase extends \PHPUnit_Framework_TestCase
         $this->manager = new Manager($this->driver);
 
         // Init the caller.
-        $this->caller = new SimpleCaller('users', 1, ['editor']);
+        $this->caller = new SimpleCaller('users', 1, array('editor'));
         $this->caller->setLock($this->getCallerLock());
     }
 
@@ -190,10 +190,10 @@ abstract class PersistentDriverTestCase extends \PHPUnit_Framework_TestCase
     {
         $lock = $this->getCallerLock();
 
-        $lock->allow(['create', 'delete'], 'comments');
+        $lock->allow(array('create', 'delete'), 'comments');
 
-        $this->assertTrue($lock->can(['create', 'delete'], 'comments'));
-        $this->assertTrue($lock->cannot(['create', 'edit'], 'comments'));
+        $this->assertTrue($lock->can(array('create', 'delete'), 'comments'));
+        $this->assertTrue($lock->cannot(array('create', 'edit'), 'comments'));
     }
 
     /** @test */
@@ -213,13 +213,13 @@ abstract class PersistentDriverTestCase extends \PHPUnit_Framework_TestCase
     {
         $lock = $this->getCallerLock();
 
-        $lock->allow(['create', 'delete'], 'comments');
+        $lock->allow(array('create', 'delete'), 'comments');
 
-        $lock->toggle(['create', 'delete'], 'comments');
-        $this->assertFalse($lock->can(['create', 'delete'], 'comments'));
+        $lock->toggle(array('create', 'delete'), 'comments');
+        $this->assertFalse($lock->can(array('create', 'delete'), 'comments'));
 
-        $lock->toggle(['create', 'delete'], 'comments');
-        $this->assertTrue($lock->can(['create', 'delete'], 'comments'));
+        $lock->toggle(array('create', 'delete'), 'comments');
+        $this->assertTrue($lock->can(array('create', 'delete'), 'comments'));
     }
 
     /** @test */
@@ -239,7 +239,7 @@ abstract class PersistentDriverTestCase extends \PHPUnit_Framework_TestCase
     /** @test */
     final function it_can_check_actions_from_aliases()
     {
-        $this->manager->alias('manage', ['create', 'read', 'update', 'delete']);
+        $this->manager->alias('manage', array('create', 'read', 'update', 'delete'));
 
         $lock = $this->getCallerLock();
         $lock->allow('manage', 'accounts');
@@ -249,34 +249,34 @@ abstract class PersistentDriverTestCase extends \PHPUnit_Framework_TestCase
         $this->assertTrue($lock->can('manage', 'accounts', 1));
         $this->assertFalse($lock->can('manage', 'events'));
         $this->assertTrue($lock->can('read', 'accounts'));
-        $this->assertTrue($lock->can(['read', 'update'], 'accounts'));
+        $this->assertTrue($lock->can(array('read', 'update'), 'accounts'));
 
         // If one of the aliased actions is explicitly denied, it cannot pass anymore.
         $lock->deny('create');
 
         $this->assertTrue($lock->can('manage', 'accounts'));
         $this->assertFalse($lock->can('create', 'accounts'));
-        $this->assertTrue($lock->can(['read', 'update', 'delete'], 'accounts'));
+        $this->assertTrue($lock->can(array('read', 'update', 'delete'), 'accounts'));
     }
 
     /** @test */
     final function it_can_work_with_roles()
     {
         $this->manager->setRole('user');
-        $this->manager->setRole(['editor', 'admin'], 'user');
+        $this->manager->setRole(array('editor', 'admin'), 'user');
 
         $this->getRoleLock('user')->allow('create', 'pages');
         $this->getRoleLock('editor')->allow('publish', 'pages');
-        $this->getRoleLock('admin')->allow(['delete', 'publish'], 'pages');
+        $this->getRoleLock('admin')->allow(array('delete', 'publish'), 'pages');
 
         $lock = $this->getCallerLock();
 
-        $this->assertTrue($lock->can(['create', 'publish'], 'pages'));
+        $this->assertTrue($lock->can(array('create', 'publish'), 'pages'));
         $this->assertFalse($lock->can('delete', 'pages'));
 
         // If we deny the user from publishing anything afterwards, our role permissions are invalid.
         $lock->deny('publish');
-        $this->assertFalse($lock->can(['create', 'publish'], 'pages'));
+        $this->assertFalse($lock->can(array('create', 'publish'), 'pages'));
     }
 
     /** @test */
@@ -316,14 +316,14 @@ abstract class PersistentDriverTestCase extends \PHPUnit_Framework_TestCase
         $this->getCallerLock()->allow('update', 'users', 1);
         $this->getCallerLock()->allow('update', 'users', 2);
         $this->getCallerLock()->allow('update', 'events', 4);
-        $this->getCallerLock()->allow(['update', 'delete'], 'users', 3);
-        $this->getCallerLock()->allow(['update', 'delete'], 'users', 5);
+        $this->getCallerLock()->allow(array('update', 'delete'), 'users', 3);
+        $this->getCallerLock()->allow(array('update', 'delete'), 'users', 5);
         $this->getCallerLock()->allow('delete', 'users', 2);
         $this->getCallerLock()->deny('update', 'users', 2);
 
-        $this->assertEquals([1, 3, 5], $this->getCallerLock()->allowed('update', 'users'));
-        $this->assertEquals([3, 5, 2], $this->getCallerLock()->allowed('delete', 'users'));
-        $this->assertEquals([3, 5], $this->getCallerLock()->allowed(['update', 'delete'], 'users'));
+        $this->assertEquals(array(1, 3, 5), $this->getCallerLock()->allowed('update', 'users'));
+        $this->assertEquals(array(3, 5, 2), $this->getCallerLock()->allowed('delete', 'users'));
+        $this->assertEquals(array(3, 5), $this->getCallerLock()->allowed(array('update', 'delete'), 'users'));
     }
 
     /** @test */
@@ -332,14 +332,14 @@ abstract class PersistentDriverTestCase extends \PHPUnit_Framework_TestCase
         $this->getCallerLock()->allow('update', 'users', 1);
         $this->getCallerLock()->allow('update', 'users', 2);
         $this->getCallerLock()->allow('update', 'events', 4);
-        $this->getCallerLock()->allow(['update', 'delete'], 'users', 3);
-        $this->getCallerLock()->allow(['update', 'delete'], 'users', 5);
+        $this->getCallerLock()->allow(array('update', 'delete'), 'users', 3);
+        $this->getCallerLock()->allow(array('update', 'delete'), 'users', 5);
         $this->getCallerLock()->deny('delete', 'users', 1);
         $this->getCallerLock()->allow('delete', 'users', 2);
         $this->getCallerLock()->deny('update', 'users', 2);
 
-        $this->assertEquals([2], $this->getCallerLock()->denied('update', 'users'));
-        $this->assertEquals([1], $this->getCallerLock()->denied('delete', 'users'));
-        $this->assertEquals([1, 2], $this->getCallerLock()->denied(['update', 'delete'], 'users'));
+        $this->assertEquals(array(2), $this->getCallerLock()->denied('update', 'users'));
+        $this->assertEquals(array(1), $this->getCallerLock()->denied('delete', 'users'));
+        $this->assertEquals(array(1, 2), $this->getCallerLock()->denied(array('update', 'delete'), 'users'));
     }
 }

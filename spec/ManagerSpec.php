@@ -42,7 +42,7 @@ class ManagerSpec extends ObjectBehavior
 
     function it_can_set_action_aliases()
     {
-        $this->alias('manage', ['create', 'read', 'update', 'delete']);
+        $this->alias('manage', array('create', 'read', 'update', 'delete'));
 
         $this->getAliases()->shouldHaveCount(1);
     }
@@ -50,7 +50,7 @@ class ManagerSpec extends ObjectBehavior
     function it_can_set_roles()
     {
         $this->setRole('user');
-        $this->setRole(['editor', 'admin'], 'user');
+        $this->setRole(array('editor', 'admin'), 'user');
 
         $this->getRoles()->shouldHaveCount(3);
     }

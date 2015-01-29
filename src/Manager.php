@@ -16,12 +16,12 @@ class Manager
     /**
      * @var \BeatSwitch\Lock\ActionAlias[]
      */
-    protected $aliases = [];
+    protected $aliases = array();
 
     /**
      * @var \BeatSwitch\Lock\Roles\Role[]
      */
-    protected $roles = [];
+    protected $roles = array();
 
     /**
      * @param \BeatSwitch\Lock\Drivers\Driver $driver

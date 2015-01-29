@@ -9,10 +9,10 @@ class PermissionFactoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     function it_can_map_an_array_of_data_to_permission_objects()
     {
-        $data = [
-            ['type' => 'privilege', 'action' => 'create', 'resource_type' => 'events', 'resource_id' => 1],
-            ['type' => 'restriction', 'action' => 'update', 'resource_type' => 'comments', 'resource_id' => null],
-        ];
+        $data = array(
+            array('type' => 'privilege', 'action' => 'create', 'resource_type' => 'events', 'resource_id' => 1),
+            array('type' => 'restriction', 'action' => 'update', 'resource_type' => 'comments', 'resource_id' => null),
+        );
 
         $result = PermissionFactory::createFromData($data);
 
@@ -22,7 +22,7 @@ class PermissionFactoryTest extends \PHPUnit_Framework_TestCase
     /** @test */
     function it_can_map_an_array_of_data_to_a_permission_object()
     {
-        $data = ['type' => 'privilege', 'action' => 'update', 'resource_type' => 'comments', 'resource_id' => null];
+        $data = array('type' => 'privilege', 'action' => 'update', 'resource_type' => 'comments', 'resource_id' => null);
 
         $result = PermissionFactory::createFromArray($data);
 
@@ -44,7 +44,7 @@ class PermissionFactoryTest extends \PHPUnit_Framework_TestCase
         $secondObject->resource_type = 'comments';
         $secondObject->resource_id = null;
 
-        $result = PermissionFactory::createFromData([$object, $secondObject]);
+        $result = PermissionFactory::createFromData(array($object, $secondObject));
 
         $this->assertContainsOnlyInstancesOf('BeatSwitch\Lock\Permissions\Permission', $result);
     }
@@ -71,7 +71,7 @@ class PermissionFactoryTest extends \PHPUnit_Framework_TestCase
             'The permission type you provided "something" is incorrect.'
         );
 
-        $data = [['type' => 'something', 'action' => 'create', 'resource_type' => 'events', 'resource_id' => 1]];
+        $data = array(array('type' => 'something', 'action' => 'create', 'resource_type' => 'events', 'resource_id' => 1));
 
         PermissionFactory::createFromData($data);
     }

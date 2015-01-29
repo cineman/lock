@@ -15,7 +15,7 @@ class ArrayDriver implements Driver
      *
      * @var array
      */
-    protected $permissions = [];
+    protected $permissions = array(];
 
     /**
      * Returns all the permissions for a caller
@@ -27,7 +27,7 @@ class ArrayDriver implements Driver
     {
         $key = $this->getCallerKey($caller);
 
-        return array_key_exists($key, $this->permissions) ? $this->permissions[$key] : [];
+        return array_key_exists($key, $this->permissions) ? $this->permissions[$key] : array();
     }
 
     /**
@@ -91,7 +91,7 @@ class ArrayDriver implements Driver
     {
         $key = $this->getRoleKey($role);
 
-        return array_key_exists($key, $this->permissions) ? $this->permissions[$key] : [];
+        return array_key_exists($key, $this->permissions) ? $this->permissions[$key] : array();
     }
 
     /**
