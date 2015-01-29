@@ -15,7 +15,7 @@ class ArrayDriver implements Driver
      *
      * @var array
      */
-    protected $permissions = array(];
+    protected $permissions = array();
 
     /**
      * Returns all the permissions for a caller
