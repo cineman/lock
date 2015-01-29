@@ -1,4 +1,4 @@
-# Lock - Acl for PHP 5.4+
+# Lock - Acl for PHP 5.3+
 
 [![Build Status](https://img.shields.io/travis/BeatSwitch/lock/master.svg?style=flat-square)](https://travis-ci.org/BeatSwitch/lock)
 [![Quality Score](https://img.shields.io/scrutinizer/g/BeatSwitch/lock.svg?style=flat-square)](https://scrutinizer-ci.com/g/BeatSwitch/lock)
@@ -9,7 +9,9 @@
 
 <img width="100%" src="https://s3.eu-central-1.amazonaws.com/assets.beatswitch.com/lock_banner.png">
 
-Lock is a flexible, driver based **Acl** package for **PHP 5.4+**.
+Lock is a flexible, driver based **Acl** package for **PHP 5.3+**.
+
+**This fork basically adds support for php5.3**
 
 Created by [Dries Vints](https://twitter.com/driesvints). Made possible thanks to [BeatSwitch](https://beatswitch.com). Inspired by [Authority](https://github.com/machuga/authority) by [Matthew Machuga](https://twitter.com/machuga). Logo by [Jerry Low](http://www.jerrylow.com).
 
