@@ -1,6 +1,6 @@
 {
-    "name": "beatswitch/lock",
-    "description": "A flexible, driver based Acl package for PHP 5.4+",
+    "name": "cineman/lock53",
+    "description": "A flexible, driver based Acl package for PHP 5.3+",
     "keywords": ["acl", "permissions", "security", "roles", "BeatSwitch", "asserts", "conditions", "drivers"],
     "homepage": "https://github.com/BeatSwitch/lock",
     "license": "MIT",
@@ -21,7 +21,7 @@
         "issues": "https://github.com/BeatSwitch/lock/issues"
     },
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.3"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
