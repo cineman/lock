@@ -3,10 +3,8 @@ namespace BeatSwitch\Lock\Callers;
 
 use BeatSwitch\Lock\LockAware;
 
-final class SimpleCaller implements Caller
+final class SimpleCaller extends LockAware implements Caller 
 {
-    use LockAware;
-
     /**
      * @var string
      */

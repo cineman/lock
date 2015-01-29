@@ -6,7 +6,7 @@ namespace BeatSwitch\Lock;
  * After setting the Lock instance with the setLock method, the object receives
  * the ability to call the public api from the lock instance onto itself.
  */
-trait LockAware
+class LockAware
 {
     /**
      * The current object's lock instance
